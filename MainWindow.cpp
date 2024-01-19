@@ -10,10 +10,10 @@ MainWindow::MainWindow()
     rendererWidget_ = new RendererWidget();
     
     // Создание групп
-    statsGroupBox_ = new QGroupBox("Stats");
-    resolutionScaleRadios_ = new QGroupBox("Resolution Scale");
-    renderComponentToggles_ = new QGroupBox("Render Components");
-    overlayRadios_ = new QGroupBox("Debug Overlay");
+    statsGroupBox_ = new QGroupBox("Статистика");
+    resolutionScaleRadios_ = new QGroupBox("Масштаб разрешения");
+    renderComponentToggles_ = new QGroupBox("Компоненты рендеринга");
+    overlayRadios_ = new QGroupBox("Наложение отладки");
     
     // Использование вертикальной компоновки для всех групп.
     statsGroupBox_->setLayout(new QBoxLayout(QBoxLayout::TopToBottom));
@@ -29,27 +29,27 @@ MainWindow::MainWindow()
     samplesPerPixelLabel_ = createStatsLabel();
     
     // Создание преключателей с масштабом разрешения
-    createResolutionScaleRadio(RS_FullRes, "Native (Very Slow)");
-    createResolutionScaleRadio(RS_HalfRes, "1/2 Res");
-    createResolutionScaleRadio(RS_QuarterRes, "1/4 Res");
-    createResolutionScaleRadio(RS_EighthRes, "1/8 Resolution")->setChecked(true); // Default
-    createResolutionScaleRadio(RS_SixteenthRes, "1/16 Resolution");
+    createResolutionScaleRadio(RS_FullRes, "Native (очень медленный)");
+    createResolutionScaleRadio(RS_HalfRes, "1/2 Разрешение");
+    createResolutionScaleRadio(RS_QuarterRes, "1/4 Разрешение");
+    createResolutionScaleRadio(RS_EighthRes, "1/8 Разрешение")->setChecked(true); // Default
+    createResolutionScaleRadio(RS_SixteenthRes, "1/16 Разрешениеn");
     
     // Создание переключателей компонентов рендеринга
-    createRenderComponentToggle(RC_Direct, "Direct Light");
-    createRenderComponentToggle(RC_Impulse, "Impulse Light");
-    createRenderComponentToggle(RC_Indirect, "Indirect Light");
-    createRenderComponentToggle(RC_Shadows, "Shadows");
-    createRenderComponentToggle(RC_Spheres, "Spheres");
+    createRenderComponentToggle(RC_Direct, "Прямой свет");
+    createRenderComponentToggle(RC_Impulse, "Импульсный свет");
+    createRenderComponentToggle(RC_Indirect, "Непрямой свет");
+    createRenderComponentToggle(RC_Shadows, "Тени");
+    createRenderComponentToggle(RC_Spheres, "Сферы");
     
-    // Создать переключатель наложения
-    createOverlayRadio(RO_None, "No Overlay")->setChecked(true); // Default = No Overlay
-    createOverlayRadio(RO_PixelRays, "Pixel Rays");
-    createOverlayRadio(RO_Distance, "Hit Distance");
-    createOverlayRadio(RO_Position, "Hit Position");
-    createOverlayRadio(RO_Color, "Surface Color");
-    createOverlayRadio(RO_Normals, "Surface Normals");
-    createOverlayRadio(RO_Emission, "Surface Emission");
+    // Создание переключателей наложений
+    createOverlayRadio(RO_None, "Без наложения")->setChecked(true); // Default = No Overlay
+    createOverlayRadio(RO_PixelRays, "Пиксельные лучи");
+    createOverlayRadio(RO_Distance, "Расстояние попадания");
+    createOverlayRadio(RO_Position, "Позиция попадания");
+    createOverlayRadio(RO_Color, "Цвет поверхности");
+    createOverlayRadio(RO_Normals, "Нормали поверхности");
+    createOverlayRadio(RO_Emission, "Поверхностная эмиссия");
     
     // Добавление виджетов на боковую панель
     QBoxLayout* sidePanelLayout = new QBoxLayout(QBoxLayout::TopToBottom);
@@ -98,7 +98,7 @@ QRadioButton* MainWindow::createResolutionScaleRadio(RenderResolution scale, con
 QCheckBox* MainWindow::createRenderComponentToggle(RenderComponent component, const char* label)
 {
     QCheckBox* checkBox = new QCheckBox(label);
-    checkBox->setProperty("component", (int)component);
+    checkBox->setProperty("составной", (int)component);
     checkBox->setChecked(true);
     
     renderComponentToggles_->layout()->addWidget(checkBox);
@@ -109,7 +109,7 @@ QRadioButton* MainWindow::createOverlayRadio(RenderOverlay overlay, const char* 
 {
     // Создание переключателя
     QRadioButton* radio = new QRadioButton(label);
-    radio->setProperty("overlay", (int)overlay);
+    radio->setProperty("наложение", (int)overlay);
     
     // Добавление в группу наложенных переключателей
     overlayRadios_->layout()->addWidget(radio);
